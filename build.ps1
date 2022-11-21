@@ -1,3 +1,3 @@
-cd ..\bin
+cd .\bin
 make
-cd ..\test
+cd ..

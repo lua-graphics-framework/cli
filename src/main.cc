@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <filesystem>
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -9,6 +10,7 @@
 #include "include/help.h"
 #include "include/new.h"
 #include "include/update.h"
+#include "include/run.h"
 
 int main(int argc, char *argv[])
 {
@@ -39,17 +41,17 @@ int main(int argc, char *argv[])
       {
         if (str == "new")
         {
-          system("powershell.exe ./src/ps/new.ps1");
+          newCmd();
         }
 
         if (str == "run")
         {
-          system("powershell.exe ../src/ps/run.ps1");
+          runCmd();  
         }
 
         if (str == "build")
         {
-          system("powershell.exe ../src/ps/build.ps1");
+          system("powershell.exe ./src/ps/build.ps1");
         }
         
         if (str == "update")

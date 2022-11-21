@@ -9,7 +9,7 @@
 
 void update()
 {
-  std::string currentVersion = "0.1.0";
+  std::string currentVersion = "0.0.0";
 
   // Get the latest version
   system("curl -o version.txt https://raw.githubusercontent.com/lua-graphics-framework/lgf/main/VERSION");
@@ -25,7 +25,7 @@ void update()
 
   if (currentVersion == version)
   {
-    system("powershell.exe Write-Host \"Up to date!\" -ForegroundColor green");
+    system("powershell.exe Write-Host \"LGF up to date!\" -ForegroundColor green");
   }
   else
   {
@@ -46,9 +46,10 @@ void update()
       std::filesystem::create_directory(installLocation);
     }
     
-    if (!std::filesystem::is_empty(installLocation))
+    if (std::filesystem::is_regular_file(installLocation + "\\bin\\libLuaGraphicsFramework.dll"))
     {
-      std::filesystem::remove_all(installLocation);
+      system("powershell.exe rm $HOME\\.lgf\\*.lua");
+      system("powershell.exe rm -r $HOME\\.lgf\\bin");
     }
 
     // Download
@@ -66,6 +67,14 @@ void update()
 
     std::string mv = "powershell.exe mv LGF-v" + version + " " + installLocation;
     system(mv.c_str());
+
+    std::string mvBin = "powershell.exe mv $HOME\\.lgf\\LGF-v" + version + "\\*.lua $HOME\\.lgf";
+    std::string mvSrc = "powershell.exe mv $HOME\\.lgf\\LGF-v" + version + "\\bin $HOME\\.lgf";
+    std::string del = "powershell.exe rm $HOME\\.lgf\\LGF-v" + version;
+
+    system(mvBin.c_str());
+    system(mvSrc.c_str());
+    system(del.c_str());
 
     system("powershell.exe Write-Host \"Done!\" -ForegroundColor green");
   }
@@ -85,12 +94,33 @@ void update()
 
   if (currentCliVersion != cliVersion)
   {
+    system("powershell.exe Write-Host \"Updating CLI...\" -ForegroundColor green");
+
     std::string installLocation = getenv("USERPROFILE");
     installLocation += "\\.lgf";
 
-    std::string file = "https://github.com/lua-graphics-framework/lgf/releases/download/lgf-v" + version + "/LGF-v"
-      + version + ".tar.gz";
+    // Download
+    std::string file = "https://github.com/lua-graphics-framework/cli/releases/download/v" + version + "/LGFCLI.exe";
+    std::string updateCmd = "powershell.exe wget " + file + " -o LGF_cli.ex_";
+    
+    system("powershell.exe Write-Host \"Downloading...\" -ForegroundColor blue");
+    system(updateCmd.c_str());
 
-    std::string updateCmd = "powershell.exe wget " + file + " -o lgf.tar.gz";
+    std::string mv = "powershell.exe mv LGF_cli.ex_ " + installLocation;
+    system(mv.c_str());
+
+    system("powershell.exe Write-Host \"Installing...\" -ForegroundColor blue");
+
+    std::string env = getenv("USERPROFILE");
+
+    system(("powershell mv " + env + "\\.lgf\\lgf.exe $HOME\\.lgf\\lgf.bak").c_str());
+    system(("powershell mv " + env + "\\.lgf\\LGF_cli.ex_ $HOME\\.lgf\\lgf.exe").c_str());
+
+    system("powershell.exe Write-Host \"Cleaning up...\" -ForegroundColor blue");
+    system("powershell.exe rm cli_version.txt");
+  }
+  else
+  {
+    system("powershell.exe Write-Host \"CLI up to date!\" -ForegroundColor green");
   }
 }

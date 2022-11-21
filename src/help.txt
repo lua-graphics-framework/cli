@@ -1,6 +1,0 @@
-LGF CLI Version 0.1.0
-
-commands:
-  new -> creates a new LGF project in a new directory
-  init -> initializes an LGF project in the current directory
-  run -> runs the LGF project

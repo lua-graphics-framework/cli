@@ -7,20 +7,14 @@
 // Shows the text that shows the user each command and its options
 void showHelp()
 {
-  // Read the help.txt file
-  std::ifstream file("src/help.txt");
-  std::string line, content;
+  std::cout << 
 
-  if (!file.is_open())
-  {
-    std::cout << "Error: Failed to display `help` message.\n";
-    exit(1);
-  }
+  "LGF CLI Version 0.1.0\n\n"
+  "commands:\n"
 
-  while (std::getline(file, line))
-  {
-    content += line + '\n';
-  }
-
-  std::cout << content;
+  "new -> creates a new LGF project in a new directory\n"
+  "init -> initializes an LGF project in the current directory\n"
+  "update -> checks for updates and if an update is needed, LGF will update itself\n"
+  "build -> builds the LGF project for production\n"
+  "run -> runs the LGF project\n\n";
 }

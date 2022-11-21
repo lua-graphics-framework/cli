@@ -4,6 +4,7 @@ project(LGFCLI VERSION 0.1)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED true)
 
-set(SRCS src/help.cc src/main.cc src/update.cc src/run.cc src/new.cc)
+set(SRCS src/help.cc src/main.cc src/update.cc src/run.cc src/new.cc src/install.cc)
 
 add_executable(LGFCLI ${SRCS})
+target_link_libraries(LGFCLI -static-libstdc++ -static-libgcc -static)

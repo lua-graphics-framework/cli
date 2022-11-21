@@ -14,7 +14,7 @@ void update()
   // Get the latest version
   system("curl -o version.txt https://raw.githubusercontent.com/lua-graphics-framework/lgf/main/VERSION");
 
-  // convert the version file into a string
+  // Convert the version file into a string
   std::ifstream data("version.txt");
   std::string line, version;
 
@@ -23,6 +23,7 @@ void update()
 
   data.close();
 
+  // Check if we need to update
   if (currentVersion == version)
   {
     system("powershell.exe Write-Host \"LGF up to date!\" -ForegroundColor green");
@@ -35,9 +36,11 @@ void update()
     std::string file = "https://github.com/lua-graphics-framework/lgf/releases/download/lgf-v" + version + "/LGF-v"
       + version + ".tar.gz";
 
+    // Get the user's home directory
     std::string installLocation = getenv("USERPROFILE");
     installLocation += "\\.lgf";
 
+    // Get the file
     std::string updateCmd = "powershell.exe wget " + file + " -o lgf.tar.gz";
 
     // Make sure the directory exists
@@ -80,7 +83,7 @@ void update()
   }
 
   // Get the CLI latest version
-  std::string currentCliVersion = "0.0.0";
+  std::string currentCliVersion = "0.2.0";
   system("curl -o cli_version.txt https://raw.githubusercontent.com/lua-graphics-framework/lgf/main/CLI_VERSION");
 
   // convert the version file into a string

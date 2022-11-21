@@ -11,6 +11,7 @@
 #include "include/new.h"
 #include "include/update.h"
 #include "include/run.h"
+#include "include/install.h"
 
 int main(int argc, char *argv[])
 {
@@ -52,6 +53,11 @@ int main(int argc, char *argv[])
         if (str == "update")
         {
           update();
+        }
+
+        if (str == "install")
+        {
+          installCmd();
         }
       }
     }

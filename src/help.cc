@@ -14,5 +14,6 @@ void showHelp()
 
   "new -> creates a new LGF project in a new directory\n"
   "update -> checks for updates and if an update is needed, LGF will update itself\n"
+  "install -> installs LGF & LGF CLI\n"
   "run -> runs the LGF project\n\n";
 }

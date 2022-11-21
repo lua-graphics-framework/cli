@@ -13,8 +13,6 @@ void showHelp()
   "commands:\n"
 
   "new -> creates a new LGF project in a new directory\n"
-  "init -> initializes an LGF project in the current directory\n"
   "update -> checks for updates and if an update is needed, LGF will update itself\n"
-  "build -> builds the LGF project for production\n"
   "run -> runs the LGF project\n\n";
 }

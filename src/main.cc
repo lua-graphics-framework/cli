@@ -48,11 +48,6 @@ int main(int argc, char *argv[])
         {
           runCmd();  
         }
-
-        if (str == "build")
-        {
-          system("powershell.exe ./src/ps/build.ps1");
-        }
         
         if (str == "update")
         {

@@ -27,5 +27,5 @@ void installCmd()
   system("powershell.exe Write-Host \"Installing LGF...\" -ForegroundColor green");
   
   system("powershell.exe ~\\.lgf\\lgf.exe update");
-  system("powershell.exe Write-Host \"Finished! Don't forget to add ~\\.lgf to the PATH env var!\" -ForegroundColor green");
+  system("powershell.exe Write-Host \"Finished! Don't forget to add .lgf to the PATH env var!\" -ForegroundColor green");
 }

@@ -64,7 +64,7 @@ void update()
   std::string currentVersion = "0.1.0";
 
   // Get the latest version
-  system("curl -o version.txt https://raw.githubusercontent.com/lua-graphics-framework/lgf/main/VERSION");
+  system("curl -o version.txt https://raw.githubusercontent.com/lua-graphics-framework/lgf/main/VERSION --ssl-no-revoke");
 
   // Convert the version file into a string
   std::ifstream data("version.txt");
@@ -88,7 +88,7 @@ void update()
 
   // Get the CLI latest version
   std::string currentCliVersion = "0.1.0";
-  system("curl -o cli_version.txt https://raw.githubusercontent.com/lua-graphics-framework/lgf/main/CLI_VERSION");
+  system("curl -o cli_version.txt https://raw.githubusercontent.com/lua-graphics-framework/lgf/main/CLI_VERSION --ssl-no-revoke");
 
   // convert the version file into a string
   std::ifstream clidata("cli_version.txt");

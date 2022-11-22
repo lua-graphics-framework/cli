@@ -9,7 +9,7 @@
 
 void update()
 {
-  std::string currentVersion = "0.0.0";
+  std::string currentVersion = "0.1.0";
 
   // Get the latest version
   system("curl -o version.txt https://raw.githubusercontent.com/lua-graphics-framework/lgf/main/VERSION");
@@ -33,8 +33,7 @@ void update()
     system("powershell.exe Write-Host \"Updating...\" -ForegroundColor green");
 
     // Time for an update!
-    std::string file = "https://github.com/lua-graphics-framework/lgf/releases/download/lgf-v" + version + "/LGF-v"
-      + version + ".tar.gz";
+    std::string file = "https://github.com/lua-graphics-framework/lgf/releases/download/lgf-v" + version + "/LGF-v" + version + ".tar.gz";
 
     // Get the user's home directory
     std::string installLocation = getenv("USERPROFILE");
@@ -48,7 +47,7 @@ void update()
     {
       std::filesystem::create_directory(installLocation);
     }
-    
+
     if (std::filesystem::is_regular_file(installLocation + "\\bin\\libLuaGraphicsFramework.dll"))
     {
       system("powershell.exe rm $HOME\\.lgf\\*.lua");
@@ -83,7 +82,7 @@ void update()
   }
 
   // Get the CLI latest version
-  std::string currentCliVersion = "0.2.0";
+  std::string currentCliVersion = "0.1.0";
   system("curl -o cli_version.txt https://raw.githubusercontent.com/lua-graphics-framework/lgf/main/CLI_VERSION");
 
   // convert the version file into a string
@@ -105,7 +104,7 @@ void update()
     // Download
     std::string file = "https://github.com/lua-graphics-framework/cli/releases/download/v" + version + "/LGFCLI.exe";
     std::string updateCmd = "powershell.exe wget " + file + " -o LGF_cli.ex_";
-    
+
     system("powershell.exe Write-Host \"Downloading...\" -ForegroundColor blue");
     system(updateCmd.c_str());
 

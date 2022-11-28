@@ -1,3 +1,6 @@
 #pragma once
 
-void showHelp();
+namespace WindowsHelp
+{
+  void showHelp();
+}

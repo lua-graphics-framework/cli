@@ -1,3 +1,6 @@
 #pragma once
 
-void runCmd();
+namespace WindowsRun
+{
+  void runCmd();
+}

@@ -1,4 +1,7 @@
 #pragma once
 
-void unconditionalUpdate();
-void update();
+namespace WindowsUpdate
+{
+  void unconditionalUpdate();
+  void update();
+}

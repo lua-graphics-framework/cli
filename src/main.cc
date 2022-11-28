@@ -12,6 +12,10 @@
 #include "include/install.h"
 #endif
 
+#ifdef __linux__
+#include "platform/linux/include/help.h"
+#endif
+
 int main(int argc, char *argv[])
 {
   // Make sure the user inputted an argument

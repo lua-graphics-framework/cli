@@ -4,7 +4,7 @@
 
 #include "include/new.h"
 
-void newCmd()
+void WindowsNew::newCmd()
 {
   std::string projectName = "";
   system("powershell.exe Write-Host \"Creating an LGF project...\" -ForegroundColor green");

@@ -5,7 +5,7 @@
 #include "include/help.h"
 
 // Shows the text that shows the user each command and its options
-void showHelp()
+void WindowsHelp::showHelp()
 {
   std::cout << 
 

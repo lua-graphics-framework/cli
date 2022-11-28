@@ -8,7 +8,7 @@
 #include <Windows.h>
 
 // Updates LGF unconditionally
-void unconditionalUpdate()
+void WindowsUpdate::unconditionalUpdate()
 {
   // Time for an update!
   std::string file = "https://github.com/lua-graphics-framework/lgf/releases/download/lgf-v0.1.0/LGF-v0.1.0.tar.gz";
@@ -59,7 +59,7 @@ void unconditionalUpdate()
   system("powershell.exe Write-Host Done! -ForegroundColor green");
 }
 
-void update()
+void WindowsUpdate::update()
 {
   std::string currentVersion = "0.1.0";
 

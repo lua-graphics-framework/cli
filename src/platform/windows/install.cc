@@ -5,9 +5,11 @@
 #include "include/install.h"
 #include "include/update.h"
 
+#ifdef _WIN32
 #include <Windows.h>
+#endif
 
-void installCmd()
+void WindowsInstall::installCmd()
 {
   system("powershell.exe Write-Host \"Installing LGF CLI...\" -ForegroundColor green");
 

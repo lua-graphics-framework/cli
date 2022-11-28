@@ -14,6 +14,8 @@
 
 #ifdef __linux__
 #include "platform/linux/include/help.h"
+#include "platform/linux/include/new.h"
+#include "platform/linux/include/run.h"
 #endif
 
 int main(int argc, char *argv[])
@@ -38,7 +40,11 @@ int main(int argc, char *argv[])
         // Help
         if (str == "--help")
         {
+#ifdef _WIN32
           showHelp();
+#elif __linux__
+          LinuxHelp::showHelp();
+#endif
         }
         else
         {
@@ -52,25 +58,41 @@ int main(int argc, char *argv[])
         // Creates a new LGF project
         if (str == "new")
         {
-          newCmd();
+#ifdef _WIN32
+          showHelp();
+#elif __linux__
+          LinuxNew::newCmd();
+#endif
         }
 
         // Runs the LGF project
         if (str == "run")
         {
-          runCmd();  
+#ifdef _WIN32
+          showHelp();
+#elif __linux__
+          LinuxRun::runCmd();
+#endif  
         }
         
         // Updates LGF
         if (str == "update")
         {
-          update();
+#ifdef _WIN32
+    showHelp();
+#elif __linux__
+    LinuxHelp::showHelp();
+#endif
         }
 
         // Installs LGF
         if (str == "install")
         {
-          installCmd();
+#ifdef _WIN32
+    showHelp();
+#elif __linux__
+    LinuxHelp::showHelp();
+#endif
         }
       }
     }
@@ -78,7 +100,11 @@ int main(int argc, char *argv[])
 
   if (argc == 1)
   {
+#ifdef _WIN32
     showHelp();
+#elif __linux__
+    LinuxHelp::showHelp();
+#endif
   }
 
   return 0;

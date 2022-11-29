@@ -4,12 +4,11 @@
 #include <filesystem>
 
 #ifdef _WIN32
-#include <Windows.h>
-#include "include/help.h"
-#include "include/new.h"
-#include "include/update.h"
-#include "include/run.h"
-#include "include/install.h"
+#include "platform/windows/include/help.h"
+#include "platform/windows/include/new.h"
+#include "platform/windows/include/run.h"
+#include "platform/windows/include/install.h"
+#include "platform/windows/include/update.h"
 #endif
 
 #ifdef __linux__
@@ -43,7 +42,7 @@ int main(int argc, char *argv[])
         if (str == "--help")
         {
 #ifdef _WIN32
-          showHelp();
+          WindowsHelp::showHelp();
 #elif __linux__
           LinuxHelp::showHelp();
 #endif
@@ -61,7 +60,7 @@ int main(int argc, char *argv[])
         if (str == "new")
         {
 #ifdef _WIN32
-          showHelp();
+          WindowsNew::newCmd();
 #elif __linux__
           LinuxNew::newCmd();
 #endif
@@ -71,7 +70,7 @@ int main(int argc, char *argv[])
         if (str == "run")
         {
 #ifdef _WIN32
-          showHelp();
+          WindowsRun::runCmd();
 #elif __linux__
           LinuxRun::runCmd();
 #endif  
@@ -81,9 +80,9 @@ int main(int argc, char *argv[])
         if (str == "update")
         {
 #ifdef _WIN32
-    showHelp();
+          WindowsUpdate::update();
 #elif __linux__
-    LinuxUpdate::updateCmd();
+          LinuxUpdate::updateCmd();
 #endif
         }
 
@@ -91,9 +90,9 @@ int main(int argc, char *argv[])
         if (str == "install")
         {
 #ifdef _WIN32
-    showHelp();
+          WindowsInstall::installCmd();
 #elif __linux__
-    LinuxInstall::installCmd();
+          LinuxInstall::installCmd();
 #endif
         }
       }
@@ -103,7 +102,7 @@ int main(int argc, char *argv[])
   if (argc == 1)
   {
 #ifdef _WIN32
-    showHelp();
+    WindowsHelp::showHelp();
 #elif __linux__
     LinuxHelp::showHelp();
 #endif

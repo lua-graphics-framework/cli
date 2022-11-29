@@ -30,6 +30,6 @@ void WindowsInstall::installCmd()
 
   system("powershell.exe Write-Host \"Installing LGF...\" -ForegroundColor green");
 
-  unconditionalUpdate();
+  WindowsUpdate::unconditionalUpdate();
   system("powershell.exe Write-Host \"Finished! Do not forget to add lgf to the PATH environment variable!\" -ForegroundColor green");
 }

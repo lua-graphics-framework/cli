@@ -28,7 +28,7 @@ void LinuxUpdate::checkVersion()
 void LinuxUpdate::unconditionalUpdate()
 {
   system("printf \"\e[32mUpdating LGF...\e[0m\n\"");
-  std::string file = "https://github.com/lua-graphics-framework/lgf/releases/download/lgf-v" + version + "/LGF-v" + version + ".tar.gz";
+  std::string file = "https://github.com/lua-graphics-framework/lgf/releases/download/lgf-v" + version + "/LGF-v" + version + "-linux/.tar.gz";
 
   system("printf \"\e[34m Downloading...\e[0m\n\"");
   // Downloading time!

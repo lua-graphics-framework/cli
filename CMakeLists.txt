@@ -7,7 +7,8 @@ set(CMAKE_CXX_STANDARD_REQUIRED true)
 if(MSVC OR MINGW)
   set(SRCS src/help.cc src/main.cc src/update.cc src/run.cc src/new.cc src/install.cc)
 elseif(LINUX)
-  set(SRCS src/main.cc src/platform/linux/help.cc src/platform/windows/help.cc src/platform/linux/new.cc src/platform/linux/run.cc)
+  set(SRCS src/main.cc src/platform/linux/help.cc src/platform/windows/help.cc src/platform/linux/new.cc 
+    src/platform/linux/run.cc src/platform/linux/install.cc src/platform/linux/update.cc)
 endif(MSVC OR MINGW)
 
 add_executable(LGFCLI ${SRCS})

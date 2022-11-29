@@ -16,6 +16,8 @@
 #include "platform/linux/include/help.h"
 #include "platform/linux/include/new.h"
 #include "platform/linux/include/run.h"
+#include "platform/linux/include/install.h"
+#include "platform/linux/include/update.h"
 #endif
 
 int main(int argc, char *argv[])
@@ -81,7 +83,7 @@ int main(int argc, char *argv[])
 #ifdef _WIN32
     showHelp();
 #elif __linux__
-    LinuxHelp::showHelp();
+    LinuxUpdate::updateCmd();
 #endif
         }
 
@@ -91,7 +93,7 @@ int main(int argc, char *argv[])
 #ifdef _WIN32
     showHelp();
 #elif __linux__
-    LinuxHelp::showHelp();
+    LinuxInstall::installCmd();
 #endif
         }
       }

@@ -7,9 +7,9 @@ CLI tools for any library makes it 100x easier to use. For LGF, this is the defa
 ## **Roadmap**
 
 - [x] Main commands
-- [ ] Security improvements
 - [ ] Code cleanup
 - [ ] Packaging system
+- [ ] Security improvements
 - [ ] Init command
 - [ ] Cross platform support
 

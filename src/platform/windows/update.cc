@@ -4,14 +4,15 @@
 #include <filesystem>
 
 #include "include/update.h"
-
 #include <Windows.h>
+
+std::string version;
 
 // Updates LGF unconditionally
 void WindowsUpdate::unconditionalUpdate()
 {
   // Time for an update!
-  std::string file = "https://github.com/lua-graphics-framework/lgf/releases/download/lgf-v0.1.0/LGF-v0.1.0.tar.gz";
+  std::string file = "https://github.com/lua-graphics-framework/lgf/releases/download/lgf-v" + version + "/LGF-v" + version + "/.tar.gz";
 
   // Get the user's home directory
   std::string installLocation = getenv("USERPROFILE");
@@ -45,12 +46,12 @@ void WindowsUpdate::unconditionalUpdate()
   std::filesystem::remove("lgf.tar.gz");
   std::filesystem::remove("version.txt");
 
-  std::string mv = "powershell.exe mv LGF-v0.1.0 " + installLocation;
+  std::string mv = "powershell.exe mv LGF-v" + version + " " + installLocation;
   system(mv.c_str());
 
-  std::string mvBin = "powershell.exe mv $HOME\\.lgf\\LGF-v0.1.0\\*.lua $HOME\\.lgf";
-  std::string mvSrc = "powershell.exe mv $HOME\\.lgf\\LGF-v0.1.0\\bin $HOME\\.lgf";
-  std::string del = "powershell.exe rm $HOME\\.lgf\\LGF-v0.1.0";
+  std::string mvBin = "powershell.exe mv $HOME\\.lgf\\LGF-v" + version + "\\*.lua $HOME\\.lgf";
+  std::string mvSrc = "powershell.exe mv $HOME\\.lgf\\LGF-v" + version + "\\bin $HOME\\.lgf";
+  std::string del = "powershell.exe rm $HOME\\.lgf\\LGF-v" + version;
 
   system(mvBin.c_str());
   system(mvSrc.c_str());
@@ -64,11 +65,15 @@ void WindowsUpdate::update()
   std::string currentVersion = "0.1.0";
 
   // Get the latest version
-  system("curl -o version.txt https://raw.githubusercontent.com/lua-graphics-framework/lgf/main/VERSION --ssl-no-revoke");
+  if (!system("curl -o version.txt https://raw.githubusercontent.com/lua-graphics-framework/lgf/main/VERSION --ssl-no-revoke"))
+  {
+    std::cout << "Error: Failed to get the latest version of LGF.\n";
+    exit(1);
+  }
 
   // Convert the version file into a string
   std::ifstream data("version.txt");
-  std::string line, version;
+  std::string line;
 
   std::getline(data, line);
   version += line;

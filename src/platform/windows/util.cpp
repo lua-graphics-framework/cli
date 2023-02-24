@@ -24,6 +24,7 @@ void WindowsUtilities::coloredPrint(int color, std::string text) {
 
 // Executes a system command with a C++ string rather than a C string
 void WindowsUtilities::cppSystem(std::string cmd) {
-  const char *cCmd = cmd.c_str();
+  std::string modified = "powershell.exe " + cmd;
+  const char *cCmd = modified.c_str();
   system(cCmd);
 }

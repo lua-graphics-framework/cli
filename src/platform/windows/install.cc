@@ -4,6 +4,7 @@
 
 #include "include/install.h"
 #include "include/update.h"
+#include "include/util.h"
 
 #ifdef _WIN32
 #include <Windows.h>
@@ -11,25 +12,25 @@
 
 void WindowsInstall::installCmd()
 {
-  system("powershell.exe Write-Host \"Installing LGF CLI...\" -ForegroundColor green");
+  WindowsUtilities::coloredPrint(GREEN, "Installing LGF CLI...");
 
-  std::string env = getenv("USERPROFILE");
-
-  if (!std::filesystem::is_directory(env + "\\.lgf"))
+  // Create a .lgf folder
+  if (!std::filesystem::is_directory("$HOME\\.lgf"))
   {
-    system("powershell.exe Write-Host \"Creating .lgf folder\" -ForegroundColor blue");
-    std::filesystem::create_directories(env + "\\.lgf");
+    WindowsUtilities::coloredPrint(BLUE, "Creating .lgf folder");
+    std::filesystem::create_directory("$HOME\\.lgf");
   }
 
-  system("powershell.exe Write-Host \"Copying\" -ForegroundColor blue");
+  // Copy the current file
+  WindowsUtilities::coloredPrint(BLUE, "Copying self...");
 
   char path[1000];
   GetModuleFileNameA(NULL, path, 1000);
 
-  std::filesystem::copy_file(path, env + "\\.lgf\\lgf.exe");
+  std::filesystem::copy_file(path, "$HOME\\.lgf\\lgf.exe");
+  WindowsUtilities::coloredPrint(BLUE, "Installing LGF...");
 
-  system("powershell.exe Write-Host \"Installing LGF...\" -ForegroundColor green");
-
+  // Install the "real" LGF
   WindowsUpdate::unconditionalUpdate();
-  system("powershell.exe Write-Host \"Finished! Do not forget to add lgf to the PATH environment variable!\" -ForegroundColor green");
+  WindowsUtilities::coloredPrint(GREEN, "Finished! Do not forget to add \"$HOME\\.lgf\" to the PATH environment variable!");
 }

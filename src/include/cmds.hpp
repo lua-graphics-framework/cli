@@ -1,6 +1,9 @@
 #pragma once
 
 namespace Commands {
+  bool checkUpdateClean();
+  void clean();
+
   void help();
   void install();
   void new_();

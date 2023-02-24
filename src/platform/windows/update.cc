@@ -111,12 +111,18 @@ void WindowsUpdate::update()
     WindowsUtilities::cppSystem("mv $HOME\\.lgf\\LGF_cli.ex_ $HOME\\.lgf\\lgf.exe");
 
     WindowsUtilities::coloredPrint(BLUE, "Note: The excess files will be removed the next time you use the CLI.");
-    // TODO: Remove lgf.exec
+
+    std::ofstream updatedFile("$HOME/.lgf/updated");
+    updatedFile << "DO NOT DELETE ME.\n";
+    updatedFile.close();
   }
   else
   {
     WindowsUtilities::coloredPrint(GREEN, "CLI up to date!");
   }
+
+  data.close();
+  clidata.close();
 
   WindowsUtilities::cppSystem("rm cli_version.txt");
   WindowsUtilities::cppSystem("rm version.txt");

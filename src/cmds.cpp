@@ -1,15 +1,41 @@
 #include <iostream>
 #include <string>
+#include <fstream>
+#include <filesystem>
 
 #include "include/cmds.hpp"
 
 #ifdef _WIN32
-#include "platform/windows/include/new.h"
-#include "platform/windows/include/run.h"
-#include "platform/windows/include/install.h"
-#include "platform/windows/include/update.h"
-#include "platform/windows/include/util.h"
+  #include "platform/windows/include/new.h"
+  #include "platform/windows/include/run.h"
+  #include "platform/windows/include/install.h"
+  #include "platform/windows/include/update.h"
+  #include "platform/windows/include/util.h"
 #endif
+
+// Checks to see if we need to clean up after updating
+bool Commands::checkUpdateClean() {
+  std::ifstream file("$HOME/.lgf/updated");
+
+  // We need to clean up
+  if (file.is_open()) {
+    file.close();
+    return true;
+  }
+
+  return false;
+}
+
+// Cleans the temporary files after updating if needed
+void Commands::clean() {
+  if (checkUpdateClean()) {
+    std::filesystem::remove("$HOME/.lgf/updated");
+
+    #ifdef _WIN32
+      std::filesystem::remove("$HOME/.lgf/lgf.exec");
+    #endif
+  }
+}
 
 void Commands::help() {
   std::cout << 

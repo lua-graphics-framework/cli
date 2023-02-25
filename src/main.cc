@@ -26,23 +26,24 @@ int main(int argc, char *argv[])
       {
         Commands::new_();
       }
-
       // Runs the LGF project
-      if (str == "run")
+      else if (str == "run")
       {
         Commands::run();
       }
-      
       // Updates LGF
-      if (str == "update")
+      else if (str == "update")
       {
         Commands::update();
       }
-
       // Installs LGF
-      if (str == "install")
+      else if (str == "install")
       {
         Commands::install();
+      }
+      else {
+        std::cout << "Invalid command. Showing help screen.\n" << std::endl;
+        Commands::help();
       }
     }
   }

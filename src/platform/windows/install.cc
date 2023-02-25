@@ -13,16 +13,18 @@
 
 void WindowsInstall::installCmd()
 {
-  WindowsUtilities::coloredPrint(GREEN, "Installing LGF CLI...");
-
   std::string env = getenv("USERPROFILE");
 
-  // Create a .lgf folder
-  if (!std::filesystem::is_directory(env + "~\\.lgf"))
-  {
-    WindowsUtilities::coloredPrint(BLUE, "Creating .lgf folder");
-    std::filesystem::create_directory(env + "\\.lgf");
+  if (std::filesystem::is_directory(env + "\\.lgf")) {
+    WindowsUtilities::coloredPrint(RED, "LGF is already installed! If you want to update, use the `lgf update` command.");
+    exit(1);
   }
+
+  WindowsUtilities::coloredPrint(GREEN, "Installing LGF CLI...");
+
+  // Create a .lgf folder
+  WindowsUtilities::coloredPrint(BLUE, "Creating .lgf folder");
+  std::filesystem::create_directory(env + "\\.lgf");
 
   // Copy the current file
   WindowsUtilities::coloredPrint(BLUE, "Copying self...");

@@ -8,13 +8,11 @@
 
 #include <Windows.h>
 
-std::string version;
-
 // Updates LGF unconditionally
-void WindowsUpdate::unconditionalUpdate()
+void WindowsUpdate::unconditionalUpdate(std::string version)
 {
   // Time for an update!
-  std::string file = "https://github.com/lua-graphics-framework/lgf/releases/download/lgf-v" + version + "/LGF-v" + version + "/.tar.gz";
+  std::string file = "https://github.com/lua-graphics-framework/lgf/releases/download/lgf-v" + version + "/LGF-v" + version + ".tar.gz";
 
   std::string installLocation = getenv("USERPROFILE");
   installLocation += "\\.lgf";
@@ -25,7 +23,11 @@ void WindowsUpdate::unconditionalUpdate()
     std::filesystem::create_directory(installLocation);
   }
 
-  // TODO: Remove .lgf directory
+  // Remove files inside .lgf directory
+  if (std::filesystem::is_directory(installLocation + "\\bin")) {
+    WindowsUtilities::cppSystem("rm " + installLocation + "\\*.lua");
+    WindowsUtilities::cppSystem("rm -r " + installLocation + "\\bin");
+  }
 
   // Download
   WindowsUtilities::coloredPrint(BLUE, "Downloading...");
@@ -38,7 +40,6 @@ void WindowsUpdate::unconditionalUpdate()
   // Cleanup
   WindowsUtilities::coloredPrint(BLUE, "Cleaning up...");
   std::filesystem::remove("lgf.tar.gz");
-  std::filesystem::remove("version.txt");
 
   // Move files
   WindowsUtilities::cppSystem("mv LGF-v" + version + " " + installLocation);
@@ -55,18 +56,14 @@ void WindowsUpdate::update()
   std::string currentVersion = "0.1.0";
 
   // Get the latest version
-  if (!system("curl -o version.txt https://raw.githubusercontent.com/lua-graphics-framework/lgf/main/VERSION --ssl-no-revoke"))
-  {
-    WindowsUtilities::coloredPrint(RED, "Error: Failed to get the latest version of LGF.\n");
-    exit(1);
-  }
+  system("curl -o version.txt https://raw.githubusercontent.com/lua-graphics-framework/lgf/dev/VERSION --ssl-no-revoke");
 
   // Convert the version file into a string
   std::ifstream data("version.txt");
   std::string line;
 
   std::getline(data, line);
-  version += line;
+  std::string version = line;
 
   data.close();
 
@@ -78,12 +75,12 @@ void WindowsUpdate::update()
   else
   {
     WindowsUtilities::coloredPrint(GREEN, "Updating LGF...");
-    unconditionalUpdate();
+    unconditionalUpdate(version);
   }
 
   // Get the latest CLI version
-  std::string currentCliVersion = "0.1.0";
-  system("curl -o cli_version.txt https://raw.githubusercontent.com/lua-graphics-framework/lgf/main/CLI_VERSION --ssl-no-revoke");
+  std::string currentCliVersion = "0.0.0";
+  system("curl -o cli_version.txt https://raw.githubusercontent.com/lua-graphics-framework/lgf/dev/CLI_VERSION --ssl-no-revoke");
 
   // convert the version file into a string
   std::ifstream clidata("cli_version.txt");
@@ -99,20 +96,21 @@ void WindowsUpdate::update()
     WindowsUtilities::coloredPrint(GREEN, "Updating CLI...");
 
     // Download
-    std::string file = "https://github.com/lua-graphics-framework/cli/releases/download/v" + version + "/LGFCLI.exe";
+    std::string file = "https://github.com/lua-graphics-framework/cli/releases/download/v" + cliVersion + "/LGFCLI.exe";
 
     WindowsUtilities::coloredPrint(BLUE, "Downloading...");
-    WindowsUtilities::cppSystem("wget " + file + " -o LGF_cli.exe");
+    WindowsUtilities::cppSystem("wget " + file + " -o LGF_cli.ex_");
 
     WindowsUtilities::coloredPrint(BLUE, "Installing...");
-    WindowsUtilities::cppSystem("mv LGF_cli.exe $HOME\\.lgf\\LGF_cli.ex_");
+    WindowsUtilities::cppSystem("mv LGF_cli.ex_ $HOME\\.lgf\\LGF_cli.ex_");
 
-    WindowsUtilities::cppSystem("mv $HOME\\.lgf\\lgf.exe $HOME\\.lgf\\lgf.exec");
+    WindowsUtilities::cppSystem("mv $HOME\\.lgf\\lgf.exe $HOME\\.lgf\\lgf_old.exe");
     WindowsUtilities::cppSystem("mv $HOME\\.lgf\\LGF_cli.ex_ $HOME\\.lgf\\lgf.exe");
 
     WindowsUtilities::coloredPrint(BLUE, "Note: The excess files will be removed the next time you use the CLI.");
 
-    std::ofstream updatedFile("$HOME/.lgf/updated");
+    std::string env = getenv("USERPROFILE");
+    std::ofstream updatedFile(env + "/.lgf/updated");
     updatedFile << "DO NOT DELETE ME.\n";
     updatedFile.close();
   }

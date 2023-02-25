@@ -15,7 +15,8 @@
 
 // Checks to see if we need to clean up after updating
 bool Commands::checkUpdateClean() {
-  std::ifstream file("$HOME/.lgf/updated");
+  std::string env = getenv("USERPROFILE");
+  std::ifstream file(env + "/.lgf/updated");
 
   // We need to clean up
   if (file.is_open()) {
@@ -29,15 +30,18 @@ bool Commands::checkUpdateClean() {
 // Cleans the temporary files after updating if needed
 void Commands::clean() {
   if (checkUpdateClean()) {
-    std::filesystem::remove("$HOME/.lgf/updated");
+    std::string env = getenv("USERPROFILE");
+    std::filesystem::remove(env + "/.lgf/updated");
 
     #ifdef _WIN32
-      std::filesystem::remove("$HOME/.lgf/lgf.exec");
+      std::filesystem::remove(env + "/.lgf/lgf_old.exe");
     #endif
   }
 }
 
 void Commands::help() {
+  clean();
+
   std::cout << 
 
   "LGF CLI Version 0.1.0\n\n"
@@ -50,25 +54,33 @@ void Commands::help() {
 }
 
 void Commands::install() {
+  clean();
+
   #ifdef _WIN32
     WindowsInstall::installCmd();
   #endif
 }
 
 void Commands::new_() {
+  clean();
+
   #ifdef _WIN32
     WindowsNew::newCmd();
   #endif
 }
 
 void Commands::run() {
+  clean();
+
   #ifdef _WIN32
     WindowsRun::runCmd();
   #endif
 }
 
 void Commands::update() {
+  clean();
+
   #ifdef _WIN32
-    WindowsInstall::installCmd();
+    WindowsUpdate::update();
   #endif
 }

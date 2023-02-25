@@ -2,6 +2,6 @@
 
 namespace WindowsUpdate
 {
-  void unconditionalUpdate();
+  void unconditionalUpdate(std::string version);
   void update();
 }

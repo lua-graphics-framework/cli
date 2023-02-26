@@ -11,11 +11,19 @@
   #include "platform/windows/include/install.h"
   #include "platform/windows/include/update.h"
   #include "platform/windows/include/util.h"
+#elif __linux__
+  #include "platform/linux/include/new.hpp"
+  #include "platform/linux/include/run.hpp"
 #endif
 
 // Checks to see if we need to clean up after updating
 bool Commands::checkUpdateClean() {
-  std::string env = getenv("USERPROFILE");
+  #ifdef _WIN32
+    std::string env = getenv("USERPROFILE");
+  #elif __unix__
+    std::string env = getenv("HOME");
+  #endif
+
   std::ifstream file(env + "/.lgf/updated");
 
   // We need to clean up
@@ -30,7 +38,12 @@ bool Commands::checkUpdateClean() {
 // Cleans the temporary files after updating if needed
 void Commands::clean() {
   if (checkUpdateClean()) {
-    std::string env = getenv("USERPROFILE");
+    #ifdef _WIN32
+      std::string env = getenv("USERPROFILE");
+    #elif __unix__
+      std::string env = getenv("HOME");
+    #endif
+
     std::filesystem::remove(env + "/.lgf/updated");
 
     #ifdef _WIN32
@@ -66,6 +79,8 @@ void Commands::new_() {
 
   #ifdef _WIN32
     WindowsNew::newCmd();
+  #elif __linux__
+    Linux::newCmd();
   #endif
 }
 
@@ -74,6 +89,8 @@ void Commands::run() {
 
   #ifdef _WIN32
     WindowsRun::runCmd();
+  #elif __linux__
+    Linux::runCmd();
   #endif
 }
 

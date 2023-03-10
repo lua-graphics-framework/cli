@@ -10,7 +10,8 @@ if(MSVC OR MINGW)
 endif(MSVC OR MINGW)
 
 if(UNIX AND NOT APPLE)
-  set(SRCS src/platform/linux/new.cpp src/platform/linux/util.cpp src/platform/linux/run.cpp)
+  set(SRCS src/platform/linux/new.cpp src/platform/linux/util.cpp src/platform/linux/run.cpp 
+    src/platform/linux/update.cpp src/platform/linux/install.cpp)
 endif(UNIX AND NOT APPLE)
 
 add_executable(LGFCLI src/cmds.cpp src/main.cc ${SRCS})

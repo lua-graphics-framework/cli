@@ -14,6 +14,8 @@
 #elif __linux__
   #include "platform/linux/include/new.hpp"
   #include "platform/linux/include/run.hpp"
+  #include "platform/linux/include/update.hpp"
+  #include "platform/linux/include/install.hpp"
 #endif
 
 // Checks to see if we need to clean up after updating
@@ -48,6 +50,8 @@ void Commands::clean() {
 
     #ifdef _WIN32
       std::filesystem::remove(env + "/.lgf/lgf_old.exe");
+    #elif __linux__
+      std::filesystem::remove(env + "/.lgf/lgf_old");
     #endif
   }
 }
@@ -67,10 +71,12 @@ void Commands::help() {
 }
 
 void Commands::install() {
-  clean();
+  // clean();
 
   #ifdef _WIN32
     WindowsInstall::installCmd();
+  #elif __linux__
+    Linux::install();
   #endif
 }
 
@@ -99,5 +105,7 @@ void Commands::update() {
 
   #ifdef _WIN32
     WindowsUpdate::update();
+  #elif __linux__
+    Linux::updateCmd();
   #endif
 }

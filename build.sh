@@ -1,3 +1,3 @@
-cd ./bin
+cd ./build
 make
 cd ..

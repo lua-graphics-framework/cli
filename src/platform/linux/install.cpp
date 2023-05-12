@@ -8,7 +8,6 @@
 #include "include/util.hpp"
 
 #include <libgen.h>
-#include <linux/limits.h>
 #include <unistd.h>
 
 void Linux::install()

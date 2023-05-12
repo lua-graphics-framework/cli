@@ -11,7 +11,7 @@
   #include "platform/windows/include/install.hpp"
   #include "platform/windows/include/update.hpp"
   #include "platform/windows/include/util.hpp"
-#elif __linux__
+#elif __linux__ || __APPLE__
   #include "platform/linux/include/new.hpp"
   #include "platform/linux/include/run.hpp"
   #include "platform/linux/include/update.hpp"
@@ -22,7 +22,7 @@
 bool Commands::checkUpdateClean() {
   #ifdef _WIN32
     std::string env = getenv("USERPROFILE");
-  #elif __unix__
+  #elif __linux__ || __APPLE__
     std::string env = getenv("HOME");
   #endif
 
@@ -42,7 +42,7 @@ void Commands::clean() {
   if (checkUpdateClean()) {
     #ifdef _WIN32
       std::string env = getenv("USERPROFILE");
-    #elif __unix__
+    #elif __linux__ || __APPLE__
       std::string env = getenv("HOME");
     #endif
 
@@ -50,7 +50,7 @@ void Commands::clean() {
 
     #ifdef _WIN32
       std::filesystem::remove(env + "/.lgf/lgf_old.exe");
-    #elif __linux__
+    #elif __linux__ || __APPLE__
       std::filesystem::remove(env + "/.lgf/lgf_old");
     #endif
   }
@@ -75,7 +75,7 @@ void Commands::install() {
 
   #ifdef _WIN32
     WindowsInstall::installCmd();
-  #elif __linux__
+  #elif __linux__ || __APPLE__
     Linux::install();
   #endif
 }
@@ -85,7 +85,7 @@ void Commands::new_() {
 
   #ifdef _WIN32
     WindowsNew::newCmd();
-  #elif __linux__
+  #elif __linux__ || __APPLE__
     Linux::newCmd();
   #endif
 }
@@ -95,7 +95,7 @@ void Commands::run() {
 
   #ifdef _WIN32
     WindowsRun::runCmd();
-  #elif __linux__
+  #elif __linux__ || __APPLE__
     Linux::runCmd();
   #endif
 }
@@ -105,7 +105,7 @@ void Commands::update() {
 
   #ifdef _WIN32
     WindowsUpdate::update();
-  #elif __linux__
+  #elif __linux__ || __APPLE__
     Linux::updateCmd();
   #endif
 }

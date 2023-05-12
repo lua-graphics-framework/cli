@@ -6,11 +6,11 @@
 #include "include/cmds.hpp"
 
 #ifdef _WIN32
-  #include "platform/windows/include/new.h"
-  #include "platform/windows/include/run.h"
-  #include "platform/windows/include/install.h"
-  #include "platform/windows/include/update.h"
-  #include "platform/windows/include/util.h"
+  #include "platform/windows/include/new.hpp"
+  #include "platform/windows/include/run.hpp"
+  #include "platform/windows/include/install.hpp"
+  #include "platform/windows/include/update.hpp"
+  #include "platform/windows/include/util.hpp"
 #elif __linux__
   #include "platform/linux/include/new.hpp"
   #include "platform/linux/include/run.hpp"

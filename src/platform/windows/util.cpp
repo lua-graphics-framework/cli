@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 
-#include "include/util.h"
+#include "include/util.hpp"
 
 // 1 = blue, 2 = red, 3 = green
 void WindowsUtilities::coloredPrint(int color, std::string text) {

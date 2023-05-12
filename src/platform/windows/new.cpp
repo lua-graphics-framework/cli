@@ -2,8 +2,8 @@
 #include <string>
 #include <filesystem>
 
-#include "include/new.h"
-#include "include/util.h"
+#include "include/new.hpp"
+#include "include/util.hpp"
 
 void WindowsNew::newCmd()
 {

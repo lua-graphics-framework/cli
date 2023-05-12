@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 
-#include "include/run.h"
-#include "include/util.h"
+#include "include/run.hpp"
+#include "include/util.hpp"
 
 void WindowsRun::runCmd()
 {

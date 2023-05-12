@@ -3,9 +3,9 @@
 #include <filesystem>
 #include <fstream>
 
-#include "include/install.h"
-#include "include/update.h"
-#include "include/util.h"
+#include "include/install.hpp"
+#include "include/update.hpp"
+#include "include/util.hpp"
 
 #ifdef _WIN32
 #include <Windows.h>

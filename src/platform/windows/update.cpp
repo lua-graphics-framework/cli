@@ -3,8 +3,8 @@
 #include <fstream>
 #include <filesystem>
 
-#include "include/update.h"
-#include "include/util.h"
+#include "include/update.hpp"
+#include "include/util.hpp"
 
 #include <Windows.h>
 

@@ -20,16 +20,6 @@ void WindowsNew::newCmd()
   std::filesystem::create_directory(projectName);
   std::filesystem::create_directory(projectName + "\\build");
   std::filesystem::create_directory(projectName + "\\scripts");
-  std::filesystem::create_directory(projectName + "\\lgf");
-
-  // Copy files
-  WindowsUtilities::coloredPrint(GREEN, "Copying files...");
-  WindowsUtilities::cppSystem("cp $HOME\\.lgf\\bin\\*.exe " + projectName + "\\build");
-  WindowsUtilities::cppSystem("cp $HOME\\.lgf\\bin\\*.dll " + projectName + "\\build");
-
-  // Copy Lua scripts
-  WindowsUtilities::coloredPrint(BLUE, "Copying modules...");
-  WindowsUtilities::cppSystem("cp $HOME\\.lgf\\*.lua " + projectName + "$name\\lgf");
 
   WindowsUtilities::coloredPrint(GREEN, "Successfully created a project!");
 }

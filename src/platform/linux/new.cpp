@@ -18,16 +18,6 @@ void Linux::newCmd() {
   std::filesystem::create_directory(projName);
   std::filesystem::create_directory(projName + "/build");
   std::filesystem::create_directory(projName + "/scripts");
-  std::filesystem::create_directory(projName + "/lgf");
-
-  // Copy files
-  Utilities::coloredPrint(COLORCODE_BLUE, "\tCopying files...");
-  Utilities::cppSystem("cp ~/.lgf/*.so " + projName + "/build");
-  Utilities::cppSystem("cp ~/.lgf/LuaGraphicsFramework " + projName + "/build");
-
-  // Copy Lua modules
-  Utilities::coloredPrint(COLORCODE_BLUE, "\tCopying modules...");
-  Utilities::cppSystem("cp ~/.lgf/*.lua " + projName + "/lgf");
 
   Utilities::coloredPrint(COLORCODE_GREEN, "Success!");
 }
